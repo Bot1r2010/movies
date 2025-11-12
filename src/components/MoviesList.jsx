@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Form, Table, Container, Button } from "react-bootstrap";
 
 const MoviesList = () => {
   const [kino, setKino] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
 
   useEffect(() => {
-    const api = 'https://www.omdbapi.com/?s=ip man&apikey=c65fcde9';
+    const api = "https://www.omdbapi.com/?s=ip man&apikey=c65fcde9";
 
     fetch(api)
       .then((res) => res.json())
@@ -17,13 +16,11 @@ const MoviesList = () => {
         } else {
           setKino([]);
         }
-      })
-      .finally(() => setLoading(false));
+      });
   }, []);
 
   const handleChange = (e) => {
     setName(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSearch = (e) => {
@@ -36,30 +33,39 @@ const MoviesList = () => {
         } else {
           setKino([]);
         }
-      })
-      .finally(() => setLoading(false));
-  }
+      });
+  };
 
   return (
     <div
       className="min-vh-100 d-flex flex-column justify-content-start py-5"
       style={{
-        background: 'linear-gradient(145deg, #0f2027, #203a43, #2c5364)',
+        background: "linear-gradient(145deg, #0f2027, #203a43, #2c5364)",
       }}
     >
-      <Container fluid className="d-flex flex-column justify-content-between min-vh-100">
+      <Container
+        fluid
+        className="d-flex flex-column justify-content-between min-vh-100"
+      >
         <div>
           <h1 className="text-center text-light mb-4 fw-bold">
             🎬 Movies Collection
           </h1>
 
-          <Form onSubmit={handleSearch} className="d-flex justify-content-center mb-5">
-              <input onChange={handleChange} type="search" placeholder="Write movie name" className="w-50" value={name} />
+          <Form
+            onSubmit={handleSearch}
+            className="d-flex justify-content-center mb-5"
+          >
+            <input
+              onChange={handleChange}
+              type="search"
+              placeholder="Write movie name"
+              className="w-50"
+              value={name}
+            />
 
-              <Button type='submit'>Search</Button>
-
+            <Button type="submit">Search</Button>
           </Form>
-
         </div>
 
         <div className="table-responsive flex-grow-1">
@@ -81,7 +87,7 @@ const MoviesList = () => {
               </tr>
             </thead>
 
-            <tbody style={{ height: '100vh' }}>
+            <tbody style={{ height: "100vh" }}>
               {kino.length > 0 ? (
                 kino.map((item, index) => (
                   <tr key={item.imdbID}>
@@ -90,9 +96,7 @@ const MoviesList = () => {
                     <td>{item.Year}</td>
                     <td>{item.imdbID}</td>
                     <td>
-                      <span>
-                        {item.Type}
-                      </span>
+                      <span>{item.Type}</span>
                     </td>
                     <td>
                       <img
